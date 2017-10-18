@@ -98,5 +98,15 @@
 		"device_id": "abc1130",
 		"timestamp": 103373859,
 		"temperature": 69.4
-	}
+	},
+	"device1": {
+		"device_id": "abc1111",
+		"timestamp": 103374444,
+		"temperature": 71.2
+	},
+	"device1": {
+		"device_id": "abc1111",
+		"timestamp": 103999999,
+		"temperature": 42.3
+	},
 }
