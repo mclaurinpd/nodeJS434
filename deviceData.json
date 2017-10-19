@@ -1,112 +1,112 @@
 {
-	"device1": {
+	"reading1": {
 		"device_id": "abc1111",
 		"timestamp": 103373840,
 		"temperature": 67.5
 	},
-	"device2": {
+	"reading2": {
 		"device_id": "abc1112",
 		"timestamp": 103373841,
 		"temperature": 67.6
 	},
-	"device3": {
+	"reading3": {
 		"device_id": "abc1113",
 		"timestamp": 103373842,
 		"temperature": 67.7
 	},
-	"device4": {
+	"reading4": {
 		"device_id": "abc1114",
 		"timestamp": 103373843,
 		"temperature": 67.8
 	},
-	"device5": {
+	"reading5": {
 		"device_id": "abc1115",
 		"timestamp": 103373844,
 		"temperature": 67.9
 	},
-	"device6": {
+	"reading6": {
 		"device_id": "abc1116",
 		"timestamp": 103373845,
 		"temperature": 68.0
 	},
-	"device7": {
+	"reading7": {
 		"device_id": "abc1117",
 		"timestamp": 103373846,
 		"temperature": 68.1
 	},
-	"device8": {
+	"reading8": {
 		"device_id": "abc1118",
 		"timestamp": 103373847,
 		"temperature": 68.2
 	},
-	"device9": {
+	"reading9": {
 		"device_id": "abc1119",
 		"timestamp": 103373848,
 		"temperature": 68.3
 	},
-	"device10": {
+	"reading10": {
 		"device_id": "abc1120",
 		"timestamp": 103373849,
 		"temperature": 68.4
 	},
-	"device11": {
+	"reading11": {
 		"device_id": "abc1121",
 		"timestamp": 103373850,
 		"temperature": 68.5
 	},
-	"device12": {
+	"reading12": {
 		"device_id": "abc1122",
 		"timestamp": 103373851,
 		"temperature": 68.6
 	},
-	"device13": {
+	"reading13": {
 		"device_id": "abc1123",
 		"timestamp": 103373852,
 		"temperature": 68.7
 	},
-	"device14": {
+	"reading14": {
 		"device_id": "abc1124",
 		"timestamp": 103373853,
 		"temperature": 68.8
 	},
-	"device15": {
+	"reading15": {
 		"device_id": "abc1125",
 		"timestamp": 103373854,
 		"temperature": 68.9
 	},
-	"device16": {
+	"reading16": {
 		"device_id": "abc1126",
 		"timestamp": 103373855,
 		"temperature": 69.0
 	},
-	"device17": {
+	"reading17": {
 		"device_id": "abc1127",
 		"timestamp": 103373856,
 		"temperature": 69.1
 	},
-	"device18": {
+	"reading18": {
 		"device_id": "abc1128",
 		"timestamp": 103373857,
 		"temperature": 69.2
 	},
-	"device19": {
+	"reading19": {
 		"device_id": "abc1129",
 		"timestamp": 103373858,
 		"temperature": 69.3
 	},
-	"device20": {
+	"reading20": {
 		"device_id": "abc1130",
 		"timestamp": 103373859,
 		"temperature": 69.4
 	},
-	"device1": {
+	"reading21": {
 		"device_id": "abc1111",
 		"timestamp": 103374444,
 		"temperature": 71.2
 	},
-	"device1": {
+	"reading22": {
 		"device_id": "abc1111",
 		"timestamp": 103999999,
 		"temperature": 42.3
-	},
+	}
 }
