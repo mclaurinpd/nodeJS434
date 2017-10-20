@@ -72,17 +72,25 @@ app.get('/temp/:id', function (req, res) {
 	   // get the device id from the parmeters
 	   var deviceName = req.params.id;
 	   var string = "";
+	   var found = false;
 	   for (var i = 1; i <= Object.keys(table).length; i++) {
 	   		var obj = table['reading'+i];
 	   		// if the device id in the url matches a device id in the array of objects
 	   		// add it to string
 	   		if (obj.device_id === deviceName) {
+				var found = true;
 	   			string += "Temperature: " + obj.temperature + "\n";
 	   			string += "Timestamp: " + obj.timestamp + "\n\n";
 	   		}
 	   }
-	   // send the string
-	   res.end(string);
+	   if (found === true) {
+	   	// send the string
+	   	res.end(string);
+	   }
+	   
+	   else {
+		res.send("404: Device not found", 404);
+	   }
 	});
 })
 
