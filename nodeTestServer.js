@@ -5,7 +5,7 @@ var fs = require("fs");
 app.get('/temp/latest', function (req, res) {
    fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
 	   var table = JSON.parse(data);
-       var latest = table.device1.timestamp;
+       var latest = table.reading1.timestamp;
        var index = 1;
 	   for (var i = 1; i <= Object.keys(table).length; i++) {
 			var timeCheck = table['reading'+i].timestamp
@@ -15,14 +15,14 @@ app.get('/temp/latest', function (req, res) {
 			}	
 	   }
 	   var reading = table['reading'+index];
-	   res.end("Most recent submission since UNIX epoch: \n\n" + "Device Id: " + device.device_id + "\nTimestamp: " + device.timestamp + "\nTemperature: " + device.temperature);
+	   res.end("Most recent submission since UNIX epoch: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
    });
 })
 
 app.get('/temp/highest', function (req, res) {
    fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
 	   var table = JSON.parse(data);
-       var highest = table.device1.temperature;
+       var highest = table.reading1.temperature;
        var index = 1;
 	   for (var i = 1; i <= Object.keys(table).length; i++) {
 			var highCheck = table['reading'+i].temperature
@@ -32,14 +32,14 @@ app.get('/temp/highest', function (req, res) {
 			}	
 	   }
 	   var reading = table['reading'+index];
-	   res.end("Highest temperature: \n\n" + "Device Id: " + device.device_id + "\nTimestamp: " + device.timestamp + "\nTemperature: " + device.temperature);
+	   res.end("Highest temperature: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
    });
 })
 
 app.get('/temp/lowest', function (req, res) {
    fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
 	   var table = JSON.parse(data);
-       var lowest = table.device1.temperature;
+       var lowest = table.reading1.temperature;
        var index = 1;
 	   for (var i = 1; i <= Object.keys(table).length; i++) {
 			var lowCheck = table['reading'+i].temperature
@@ -49,14 +49,14 @@ app.get('/temp/lowest', function (req, res) {
 			}	
 	   }
 	   var reading = table['reading'+index];
-	   res.end("Lowest temperature: \n\n" + "Device Id: " + device.device_id + "\nTimestamp: " + device.timestamp + "\nTemperature: " + device.temperature);
+	   res.end("Lowest temperature: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
    });
 })
 
 app.get('/temp/average', function (req, res) {
    fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
 	   var table = JSON.parse(data);
-       var average = table.device1.temperature;
+       var average = table.reading1.temperature;
 	   var tableLength = Object.keys(table).length
 	   for (var i = 1; i <= tableLength; i++) {
 			average = average + table['reading'+i].temperature;	
