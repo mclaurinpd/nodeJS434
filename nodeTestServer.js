@@ -1,68 +1,68 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+var bodyParser = require('body-parser');
+var json
+var deviceData = {};
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.post('/post', function (req, res) {
+	json = JSON.stringify(req.body);
+	if (!deviceData[req.body.device_id]) {
+		deviceData[req.body.device_id] = new Array();
+	}
+	deviceData[req.body.device_id].push(new Array(req.body.temperature, req.body.timestamp));
+	console.log("Entry added: " + json);
+	res.send("");
+});
 
 app.get('/temp/latest', function (req, res) {
-   fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
-	   var table = JSON.parse(data);
-       var latest = table.reading1.timestamp;
-       var index = 1;
-	   for (var i = 1; i <= Object.keys(table).length; i++) {
-			var timeCheck = table['reading'+i].timestamp
-			if (timeCheck > latest) {
-				index = i;
-				latest = timeCheck;
-			}	
+   var latest = 0;
+   Object.keys(deviceData).forEach(function (id) {
+	   for (i = 0; i < deviceData[id].length; i++) {
+			if (deviceData[id][i][1] > latest) {
+				latest = deviceData[id][i][1]
+			}
 	   }
-	   var reading = table['reading'+index];
-	   res.end("Most recent submission since UNIX epoch: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
-   });
+   })
+   res.end("Latest submission: " + latest);
 })
 
 app.get('/temp/highest', function (req, res) {
-   fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
-	   var table = JSON.parse(data);
-       var highest = table.reading1.temperature;
-       var index = 1;
-	   for (var i = 1; i <= Object.keys(table).length; i++) {
-			var highCheck = table['reading'+i].temperature
-			if (highCheck > highest) {
-				index = i;
-				highest = highCheck;
-			}	
+   var highest = 0;
+   Object.keys(deviceData).forEach(function (id) {
+	   for (i = 0; i < deviceData[id].length; i++) {
+			if (deviceData[id][i][0] > highest) {
+				highest = deviceData[id][i][0]
+			}
 	   }
-	   var reading = table['reading'+index];
-	   res.end("Highest temperature: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
-   });
+   })
+   res.end("Highest temperature: " + highest);
 })
 
 app.get('/temp/lowest', function (req, res) {
-   fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
-	   var table = JSON.parse(data);
-       var lowest = table.reading1.temperature;
-       var index = 1;
-	   for (var i = 1; i <= Object.keys(table).length; i++) {
-			var lowCheck = table['reading'+i].temperature
-			if (lowCheck < lowest) {
-				index = i;
-				lowest = lowCheck;
-			}	
+   var lowest = 10000;
+   Object.keys(deviceData).forEach(function (id) {
+	   for (i = 0; i < deviceData[id].length; i++) {
+			if (deviceData[id][i][0] < lowest) {
+				lowest = deviceData[id][i][0]
+			}
 	   }
-	   var reading = table['reading'+index];
-	   res.end("Lowest temperature: \n\n" + "Device Id: " + reading.device_id + "\nTimestamp: " + reading.timestamp + "\nTemperature: " + reading.temperature);
-   });
+   })
+   res.end("Lowest temperature: " + lowest);
 })
 
 app.get('/temp/average', function (req, res) {
-   fs.readFile( __dirname + "/" + "deviceData.json", 'utf8', function (err, data) {
-	   var table = JSON.parse(data);
-       var average = table.reading1.temperature;
-	   var tableLength = Object.keys(table).length
-	   for (var i = 1; i <= tableLength; i++) {
-			average = average + table['reading'+i].temperature;	
+   var avg = 0;
+   var count = 0;
+   Object.keys(deviceData).forEach(function (id) {
+	   for (i = 0; i < deviceData[id].length; i++) {
+			avg = avg + deviceData[id][i][0];
+			count = count + 1;
 	   }
-	   res.end("Average temperature: " + (average / tableLength));
-   });
+   })
+   res.end("Average temperature: " + (avg / count));
 })
 
 app.get('/temp/:id', function (req, res) {
